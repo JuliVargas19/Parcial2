@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+    <h3 class="text-center mb-4" th:text="${cuerpo}"></h3>
+
+    <table class="table">
+        <thead class="table-warning">
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Especie</th>
+            <th>Raza</th>
+            <th>Fecha de nacimiento</th>
+            <th>Propietario</th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
+
+        <tbody th:each="temList : ${datos}">
+        <tr>
+            <td th:text="${temList.codigo}"></td>
+            <td th:text="${temList.nombre}"></td>
+            <td th:text="${temList.especie}"></td>
+            <td th:text="${temList.raza}"></td>
+            <td th:text="${temList.fechaNacimiento}"></td>
+            <td th:text="${temList.propietario != null ? temList.propietario.nombre : 'Sin propietario asignado'}"></td>
+            <td>
+                <a class="btn btn-warning" th:href="@{/editar/{id}(id=${temList.codigo})}">Editar</a>
+                <a class="btn btn-danger" th:href="@{/eliminar/{id}(id=${temList.codigo})}"
+                   onclick="return confirm('¿Estás seguro que quieres eliminar?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="mb-3">
+        <a th:href="@{/indexPrinci}" class="btn btn-outline-primary">Regresar al Menú Principal</a>
+    </div>
+
+    <div class="mt-3">
+        <a class="btn btn-success" th:href="@{/nuevo}">Nueva Mascota</a>
+    </div>
+</div>
+</body>
+</html>
